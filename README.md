@@ -5,13 +5,13 @@ Git workflow for group 12
 ### Branching
 Before we start to work on a new feature (user story), we should pull the latest changes from the remote DAM branch, and create a new branch for the feature.
 
-Switch to the DAM branch, and pull the latest changes in to your local DAM branch
+Switch to the main branch, and pull the latest changes in to your local DAM branch
 ```
 git checkout main
 git pull
 ```
 
-Create a new branch from the DAM branch:
+Create a new branch from main:
 
 ```
 git checkout -b <feature_branch_name>
@@ -28,7 +28,7 @@ git merge <feature_branch_name>
 git push
 ```
 
-You should now see the changes reflected on the remote DAM branch. To push directly to the remote DAM branch from your feature branch, you can do the following:
+You should now see the changes reflected on the remote branch. To push directly to main branch from your feature branch, you can do the following:
 ```
 git add .
 git commit -m "fancy message"
@@ -36,7 +36,7 @@ git push origin <feature_branch_name>
 ```
 
 ### Pull
-To pull changes from the remote DAM branch, do the following:
+To pull changes from the remote branch, do the following:
 
 ```
 git pull origin <feature_branch_name>
