@@ -3,9 +3,9 @@
 Git workflow for group 12
 
 ### Branching
-Before we start to work on a new feature (user story), we should pull the latest changes from the remote DAM branch, and create a new branch for the feature.
+Before we start to work on a new feature (user story), we should pull the latest changes from the main, and create a new branch for the feature.
 
-Switch to the main branch, and pull the latest changes in to your local DAM branch
+Switch to the main branch, and pull the latest changes:
 ```
 git checkout main
 git pull
