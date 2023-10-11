@@ -1,4 +1,4 @@
-@vite(['resources/scss/app.scss', 'resources/scss/index.scss', 'resources/css/app.css', 'resources/js/app.js'])
+@vite(['resources/scss/app.scss', 'resources/scss/watchlist.scss', 'resources/css/app.css', 'resources/js/app.js'])
 
     <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -19,11 +19,16 @@
             console.log(toggle)
         }
     </script>
+
+
 </head>
 <body class="background font-color">
 <main class="main">
     <x-navbar />
     <h1>Watchlist page</h1>
+    <div class="rectangle">
+        <div class="item">Hello</div>
+    </div>
 </main>
 </body>
 </html>
