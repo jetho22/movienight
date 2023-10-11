@@ -23,7 +23,22 @@
     <body class="background font-color">
         <main class="main">
             <x-navbar />
-            <h1>Movie overview page</h1>
+            <div class="page">
+                <label class="label">
+                    <input class="searchbar" type="text" placeholder="What are you searching for?">
+                </label>
+                <div class="genres">
+                    <button class="active">Alle</button>
+                    <button>Horror</button>
+                    <button>Action</button>
+                    <button>Romance</button>
+                    <button>Popular</button>
+                    <button>Animation</button>
+                    <button>Thriller</button>
+                    <button>Comedy</button>
+                    <button>Fantasy</button>
+                </div>
+            </div>
         </main>
     </body>
 </html>

@@ -8,8 +8,6 @@
                 <li class="nav-item"><a href="/watchlist">Watchlist</a></li>
             </ul>
         </nav>
-    </div>
-    <div class="login-button">
-        <button onclick="handleToggle()">Toggle me</button>
+        <a class="login-button" href="/">Log in</a>
     </div>
 </header>
