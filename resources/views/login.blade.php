@@ -23,16 +23,16 @@
             @csrf
             <label for="email">Email</label>
             <input id="email" name="email" type="email" placeholder="email" value="{{ old('email') }}">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="password">
+            <input type="submit" form="login" value="login" class="login-button"/>
+            <div class="register">Don't have a user? Register <a href="/register">here.</a></div>
             @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
             @endif
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="password">
             @if ($errors->has('password'))
                 <span class="text-danger">{{ $errors->first('password') }}</span>
             @endif
-            <input type="submit" form="login" value="login" class="login-button"/>
-            <div class="register">Don't have a user? Register <a href="/register">here.</a></div>
         </form>
     </div>
 </main>
