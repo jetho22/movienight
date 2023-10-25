@@ -18,7 +18,7 @@
 .nav-container {
     align-items: center;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 100%;
 }
 
@@ -46,7 +46,7 @@
         padding: 0;
 
         .nav-item {
-            margin-right: 3rem;
+            margin-left: 3rem;
 
             &:hover {
                 cursor: pointer;

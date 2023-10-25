@@ -11,14 +11,6 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
-        <script>
-            var toggle = false;
-            function handleToggle() {
-                toggle = !toggle;
-                console.log(toggle)
-            }
-        </script>
     </head>
     <body class="background font-color">
         <main class="main">
@@ -28,15 +20,15 @@
                     <input class="searchbar" type="text" placeholder="What are you searching for?">
                 </label>
                 <div class="genres">
-                    <button class="active">Alle</button>
-                    <button>Horror</button>
-                    <button>Action</button>
-                    <button>Romance</button>
-                    <button>Popular</button>
-                    <button>Animation</button>
-                    <button>Thriller</button>
-                    <button>Comedy</button>
-                    <button>Fantasy</button>
+                    <button onclick="handleGenreClick(this)" class="active">Alle</button>
+                    <button onclick="handleGenreClick(this)">Horror</button>
+                    <button onclick="handleGenreClick(this)">Action</button>
+                    <button onclick="handleGenreClick(this)">Romance</button>
+                    <button onclick="handleGenreClick(this)">Popular</button>
+                    <button onclick="handleGenreClick(this)">Animation</button>
+                    <button onclick="handleGenreClick(this)">Thriller</button>
+                    <button onclick="handleGenreClick(this)">Comedy</button>
+                    <button onclick="handleGenreClick(this)">Fantasy</button>
                 </div>
             </div>
         </main>

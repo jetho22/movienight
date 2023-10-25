@@ -1,0 +1,55 @@
+@import "core";
+
+.header {
+    display: block;
+    margin: 6rem auto 0;
+    max-width: $small;
+
+    a {
+        color: var(--white);
+    }
+}
+
+.login-form {
+    margin: 2rem auto;
+    max-width: $small;
+}
+
+.login-form input,
+.login-form label {
+    display: block;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.login-form input {
+    background-color: rgb(13, 7, 38);
+    color: var(--white);
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+
+.login-form .login-button {
+    background-color: var(--white);
+    border-radius: 20px;
+    border: none;
+    color: var(--main);
+    font-size: 0.9rem;
+    padding: 0.75rem 1.5rem;
+
+    a {
+
+    }
+}
+
+.login-form .register, {
+    color: var(--white);
+    display: inline-block;
+    font-size: 0.9rem;
+    margin-left: 1rem;
+
+    a {
+        color: inherit;
+    }
+}

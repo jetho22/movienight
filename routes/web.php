@@ -23,8 +23,17 @@ Route::get('/movie', function () {
 
 Route::get('/watchlist', function () {
     return view('watchlist');
-});
+})->middleware('auth');
 
 Route::get('/account', function () {
     return view('account');
+});
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::controller(\App\Http\Controllers\LoginController::class)->group(function() {
+    Route::post('/authenticate', 'authenticate')->name('authenticate');
+    Route::post('/logout', 'logout')->name('logout');
 });

@@ -3,8 +3,8 @@
 }
 
 .searchbar {
-    background-color: rgb(13, 4, 46);
-    -webkit-backdrop-filter: saturate(180%) blur(33px);
+    background-color: rgb(13, 7, 38);
+    -webkit-backdrop-filter: blur(33px);
     border: none;
     border-radius: 0.5rem;
     color: white;
@@ -40,11 +40,12 @@
 
     button {
         background-color: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 20px;
         color: white;
+        font-size: 0.8rem;
         height: 40px;
-        margin-right: 0.25rem;
+        margin-right: 0.5rem;
         padding: 0 20px;
     }
 
