@@ -5,7 +5,7 @@
     <div class="nav-container">
         <nav class="nav">
             <ul class="nav-items">
-                <li class="nav-item"><a href="/">Search</a></li>
+                <li class="nav-item"><a href="/">Movies</a></li>
                 @auth
                 <li class="nav-item"><a href="/watchlist">Your Watchlist</a></li>
                 @endauth

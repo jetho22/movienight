@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [MovieController::class, 'index'])->name('movies.index');
 
-Route::get('/movie', function () {
-    return view('movie');
-});
+Route::get('/movie/{movie}', [MovieController::class, 'show'])->name('movies.show');
 
 Route::get('/watchlist', function () {
     return view('watchlist');
@@ -31,7 +28,7 @@ Route::get('/account', function () {
 
 Route::get('/login', function () {
     return view('login');
-})->name('login');
+})->name('login')->middleware('guest');
 
 Route::controller(\App\Http\Controllers\LoginController::class)->group(function() {
     Route::post('/authenticate', 'authenticate')->name('authenticate');
