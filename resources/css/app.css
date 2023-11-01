@@ -16,6 +16,9 @@ body {
 * {
     box-sizing: border-box;
 }
+.inputbox {
+    border-width: 0;
+}
 
 :root {
     --pink: rgb(255, 71, 225);

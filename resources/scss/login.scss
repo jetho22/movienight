@@ -10,18 +10,23 @@
     }
 }
 
+.register-form,
 .login-form {
     margin: 2rem auto;
     max-width: $small;
 }
 
+.register-form input,
+.register-form label,
 .login-form input,
 .login-form label {
     display: block;
     margin-bottom: 1rem;
     width: 100%;
+    border: none;
 }
 
+.register-form input,
 .login-form input {
     background-color: rgb(13, 7, 38);
     color: var(--white);
@@ -30,6 +35,7 @@
     padding: 1rem;
 }
 
+.register-form .register-button,
 .login-form .login-button {
     background-color: transparent;
     border-radius: 20px;
@@ -46,15 +52,16 @@
     }
 }
 
+.register-form .register-button:disabled,
 .login-form .login-button:disabled {
     cursor: not-allowed;
     opacity: 0.2;
+
 }
 
 .login-form .register, {
     color: var(--white);
     font-size: 0.9rem;
-
     a {
         color: inherit;
     }
@@ -64,4 +71,8 @@
     color: red;
     display: block;
     margin-top: 1rem;
+}
+
+a {
+    color: white;
 }
