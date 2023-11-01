@@ -38,7 +38,7 @@ Route::controller(\App\Http\Controllers\LoginController::class)->group(function(
     Route::post('/logout', 'logout')->name('logout');
 });
 
-Route::post('/create', [MovieController::class, 'createMovie'])->name('movies.create');
+Route::post('/create', [MovieController::class, 'addMovie'])->name('movies.create');
 
 Route::controller(\App\Http\Controllers\RegisterController::class)->group(function() {
     Route::post('/register', 'register')->name('register');

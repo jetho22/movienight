@@ -121,6 +121,12 @@
                     width: 0.8rem;
                 }
             }
+
+            .addButton.added {
+                background-color: lightgreen;
+                mix-blend-mode: normal;
+                opacity: 1;
+            }
         }
 
         .movie-info {
