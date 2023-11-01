@@ -29,6 +29,21 @@
                     <div class="inner">
                         @foreach($popularMovies as $movie)
                             <div class="movie-container">
+                                <form id="{{ $movie['id'] }}" method="POST" action="{{ route('movies.create') }}" style="display: none">
+                                    @csrf
+                                    <input type="text" name="api_id" id="api_id" value="{{ $movie['id'] }}">
+                                    <input type="text" name="title" id="title" value="{{ $movie['title'] }}">
+                                    <input type="text" name="rating" id="rating" value="{{ $movie['vote_average'] }}">
+                                    <input type="text" name="date_of_release" id="date_of_release" value="{{ $movie['release_date'] }}">
+                                </form>
+                                <button class="addButton" form="{{ $movie['id'] }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <g id="Icon_feather-plus" data-name="Icon feather-plus" transform="translate(-6 -6)">
+                                            <path id="Path_1" data-name="Path 1" d="M18,7.5v21" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                            <path id="Path_2" data-name="Path 2" d="M7.5,18h21" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                        </g>
+                                    </svg>
+                                </button>
                                 <a class="poster">
                                     <img
                                         src="{{ 'https://image.tmdb.org/t/p/w500/'.$movie['poster_path'] }}"

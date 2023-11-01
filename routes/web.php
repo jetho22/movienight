@@ -34,3 +34,5 @@ Route::controller(\App\Http\Controllers\LoginController::class)->group(function(
     Route::post('/authenticate', 'authenticate')->name('authenticate');
     Route::post('/logout', 'logout')->name('logout');
 });
+
+Route::post('/create', [MovieController::class, 'createMovie'])->name('movies.create');
