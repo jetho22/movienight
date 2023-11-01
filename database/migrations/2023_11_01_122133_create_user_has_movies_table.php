@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('user_has_movies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('user_id');
-            $table->integer('movie_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('movie_id');
             $table->integer('user_priority');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('movie_id')->references('id')->on('movies');
         });
     }
 

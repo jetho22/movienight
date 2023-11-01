@@ -25,9 +25,20 @@
 <body class="background font-color">
 <main class="main">
     <x-navbar />
-    <h1>Watchlist page</h1>
-    <div class="rectangle">
-        <div class="item">Hello</div>
+    <h1>Your Watchlist</h1>
+    <div class="watchlist-container">
+        <div class="watchlist-header">
+            <p>Title</p>
+            <p>Rating</p>
+            <p>DoR</p>
+        </div>
+        @foreach ($movies as $movie)
+            <div class="watchlist-item">
+                <p>{{ $movie->title }}</p>
+                <p>{{ $movie->rating }}</p>
+                <p>{{ $movie->date_of_release }}</p>
+            </div>
+        @endforeach
     </div>
 </main>
 </body>

@@ -31,7 +31,7 @@
                             <div class="movie-container">
                                 <form id="{{ $movie['id'] }}" method="POST" action="{{ route('movies.create') }}" style="display: none">
                                     @csrf
-                                    <input type="text" name="api_id" id="api_id" value="{{ $movie['id'] }}">
+                                    <input type="text" name="movie_id" id="movie_id" value="{{ $movie['id'] }}">
                                     <input type="text" name="title" id="title" value="{{ $movie['title'] }}">
                                     <input type="text" name="rating" id="rating" value="{{ $movie['vote_average'] }}">
                                     <input type="text" name="date_of_release" id="date_of_release" value="{{ $movie['release_date'] }}">
