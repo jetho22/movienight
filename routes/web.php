@@ -30,7 +30,16 @@ Route::get('/login', function () {
     return view('login');
 })->name('login')->middleware('guest');
 
+Route::get('/register', function () {
+    return view('register');
+})->name('register')->middleware('guest');
+
 Route::controller(\App\Http\Controllers\LoginController::class)->group(function() {
     Route::post('/authenticate', 'authenticate')->name('authenticate');
+    Route::post('/logout', 'logout')->name('logout');
+});
+
+Route::controller(\App\Http\Controllers\RegisterController::class)->group(function() {
+    Route::post('/register', 'register')->name('register');
     Route::post('/logout', 'logout')->name('logout');
 });
