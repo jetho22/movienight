@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
+use App\Models\Movies_genres;
+use App\Models\User_has_movies;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
@@ -26,7 +31,7 @@ class MovieController extends Controller
            return [$genre['id'] => $genre['name']];
         });
 
-        //dump($genres);
+        //dump($popularMovies);
 
         return view('index', [
             'popularMovies' => $popularMovies,
@@ -81,5 +86,28 @@ class MovieController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function createMovie(Request $request)
+    {
+        // Create a new Movie model instance and set its attributes.
+        $movie = new Movie();
+        $movie->api_id = $request->input('api_id');
+        $movie->title = $request->input('title');
+        $movie->rating = $request->input('rating');
+        $movie->date_of_release = $request->input('date_of_release');
+
+        // Save the movie record to the database.
+        $movie->save();
+
+        $user = Auth::user(); // Get the authenticated user
+        $userId = $user->id;
+        $user_has_movie = new User_has_movies();
+        $user_has_movie->user_id = $userId;
+        $user_has_movie->movie_id = $request->input('api_id');
+        $user_has_movie->save();
+
+        // You can also return a response to the client.
+        return redirect()->intended('/')->with('success', 'Movie created successfully');
     }
 }
