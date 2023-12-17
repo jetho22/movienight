@@ -22,15 +22,13 @@
         <form class="register-form" id="register" method="post" action="{{ route('register') }}">
             @csrf
             <label for="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="name">
+            <input id="name" name="name" type="text" placeholder="Name">
             <label for="username">Username</label>
-            <input id="username" name="username" type="text" placeholder="username">
+            <input id="username" name="username" type="text" placeholder="Username">
             <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="email" value="{{ old('email') }}">
+            <input id="email" name="email" type="email" placeholder="Email" value="{{ old('email') }}">
             <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="password">
-            <label for="cpassword">Confirm Password</label>
-            <input id="cpassword" name="cpassword" type="password" placeholder="confirm password">
+            <input id="password" name="password" type="password" placeholder="Password">
             <input type="submit" form="register" value="Register" class="register-button" id="submit-button" disabled/>
             <div class="register">Already a user? Login <a href="/login">here.</a></div>
             @if ($errors->has('email'))
@@ -46,7 +44,6 @@
             const usernameInput = document.getElementById('username');
             const emailInput = document.getElementById('email');
             const passwordInput = document.getElementById('password');
-            const cpasswordInput = document.getElementById('cpassword');
             const submitButton = document.getElementById('submit-button');
 
             // Function to enable/disable the submit button based on input values
@@ -55,8 +52,7 @@
                 const usernameValue = usernameInput.value.trim();
                 const emailValue = emailInput.value.trim();
                 const passwordValue = passwordInput.value.trim();
-                const cpasswordValue = cpasswordInput.value.trim();
-                submitButton.disabled = nameValue === '' || usernameValue === '' || emailValue === '' || passwordValue === '' || cpasswordValue === '';
+                submitButton.disabled = nameValue === '' || usernameValue === '' || emailValue === '' || passwordValue === '';
 
             }
 
@@ -65,7 +61,6 @@
             usernameInput.addEventListener('input', toggleSubmitButton)
             emailInput.addEventListener('input', toggleSubmitButton);
             passwordInput.addEventListener('input', toggleSubmitButton);
-            cpasswordInput.addEventListener('input', toggleSubmitButton);
 
         </script>
     </div>
