@@ -1,3 +1,4 @@
+@vite(['resources/js/nav.js'])
 <header class="header">
     <div class="logo-container">
         <a href="/"><img class="logo" src="{{ asset('movienight-logo.png') }}" alt="Movienight logo"></a>
@@ -13,10 +14,7 @@
                 <li class="nav-item"> <a class="login-button" href="/login">Log in</a></li>
                 @else
                 <li class="nav-item">
-                    <a class="login-button" href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
-                       document.getElementById('logout-form').submit();"
-                    >Log out</a>
+                    <a class="login-button" href="{{ route('logout') }}" id="loginSubmit">Log out</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none">
                         @csrf
                     </form>

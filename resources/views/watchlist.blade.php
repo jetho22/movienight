@@ -1,7 +1,7 @@
-@vite(['resources/scss/app.scss', 'resources/scss/watchlist.scss', 'resources/scss/index.scss', 'resources/css/app.css', 'resources/js/app.js'])
+@vite(['resources/scss/app.scss', 'resources/scss/watchlist.scss', 'resources/scss/index.scss', 'resources/css/app.css', 'resources/js/app.js', 'resources/js/watchlist.js'])
 
     <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-csrf-token="{{ csrf_token() }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,13 +27,13 @@
                 @foreach ($movies as $movie)
                     <div class="movie-container">
                             @if ($movie['watched'])
-                            <button class="watchedButton watched" onclick="updateWatched({{$movie->id}}, this)">
+                            <button class="watchedButton watched" data-movie-id="{{$movie->id}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="26.846" viewBox="0 0 36 26.846">
                                     <path id="Icon_awesome-check" data-name="Icon awesome-check" d="M12.227,30.9.527,19.2a1.8,1.8,0,0,1,0-2.546L3.073,14.1a1.8,1.8,0,0,1,2.546,0L13.5,21.986,30.382,5.1a1.8,1.8,0,0,1,2.546,0L35.473,7.65a1.8,1.8,0,0,1,0,2.546l-20.7,20.7A1.8,1.8,0,0,1,12.227,30.9Z" transform="translate(0 -4.577)"/>
                                 </svg>
                             </button>
                             @else
-                            <button class="watchedButton" onclick="updateWatched({{$movie->id}}, this)">
+                            <button class="watchedButton" data-movie-id="{{$movie->id}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="26.846" viewBox="0 0 36 26.846">
                                     <path id="Icon_awesome-check" data-name="Icon awesome-check" d="M12.227,30.9.527,19.2a1.8,1.8,0,0,1,0-2.546L3.073,14.1a1.8,1.8,0,0,1,2.546,0L13.5,21.986,30.382,5.1a1.8,1.8,0,0,1,2.546,0L35.473,7.65a1.8,1.8,0,0,1,0,2.546l-20.7,20.7A1.8,1.8,0,0,1,12.227,30.9Z" transform="translate(0 -4.577)"/>
                                 </svg>
@@ -66,42 +66,5 @@
         </div>
         <x-footer/>
     </main>
-    <script>
-        function updateWatched(movieId, button) {
-            // Data to be sent in the request body
-            const postData = {
-                movieId: movieId,
-            };
-
-            //console.log(movieId);
-
-            // Make the API request using fetch
-            fetch(`/updateWatched`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                },
-                body: JSON.stringify(postData),
-            })
-                .then(response => {
-                    console.log('Response Status:', response.status);
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Success:', data);
-                    if (button.classList.contains('watched')) {
-                        button.classList.remove('watched');
-                    } else {
-                        button.classList.add('watched');
-                    }
-                    // Handle the response as needed
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    // Handle errors
-                });
-        }
-    </script>
 </body>
 </html>
