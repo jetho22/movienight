@@ -21,9 +21,9 @@
         <main class="main">
             <x-navbar/>
             <div class="page">
-                <label class="label">
+                {{-- <label class="label">
                     <input class="searchbar" type="text" placeholder="What are you searching for?">
-                </label>
+                </label> --}}
                 <div class="movies-list">
                     <div class="movies-list-header">Showing: popular movies</div>
                     <div class="inner">
