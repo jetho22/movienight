@@ -1,6 +1,6 @@
 @vite(['resources/scss/app.scss', 'resources/scss/index.scss', 'resources/css/app.css', 'resources/js/app.js'])
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-csrf-token="{{ csrf_token() }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,12 +18,6 @@
                 <label class="label">
                     <input class="searchbar" type="text" placeholder="What are you searching for?">
                 </label>
-                <div class="genres">
-                    <button onclick="handleGenreClick(this)" class="active">Popular</button>
-                    @foreach($allGenres as $genreBtn)
-                        <button onclick="handleGenreClick(this)">{{ $genreBtn['name'] }}</button>
-                    @endforeach
-                </div>
                 <div class="movies-list">
                     <div class="movies-list-header">Showing: popular movies</div>
                     <div class="inner">
@@ -31,7 +25,7 @@
                             <div class="movie-container">
                                 @auth
                                     @if ($usersMovies->contains('movie_id', $movie['id']))
-                                            <button class="addButton added" form="{{ $movie['id'] }}" data-movie-id="{{ $movie['id'] }}" data-title="{{ $movie['title'] }}" data-vote-average="{{ $movie['vote_average'] }}" data-release-date="{{ $movie['release_date'] }}">
+                                            <button class="addButton added" form="{{ $movie['id'] }}" data-movie-id="{{ $movie['id'] }}" data-title="{{ $movie['title'] }}" data-vote-average="{{ $movie['vote_average'] }}" data-release-date="{{ $movie['release_date'] }}" data-poster-path="{{ $movie['poster_path'] }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                                     <g id="Icon_feather-plus" data-name="Icon feather-plus" transform="translate(-6 -6)">
                                                         <path id="Path_1" data-name="Path 1" d="M18,7.5v21" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
@@ -40,7 +34,7 @@
                                                 </svg>
                                             </button>
                                     @else
-                                            <button class="addButton" form="{{ $movie['id'] }}" data-movie-id="{{ $movie['id'] }}" data-title="{{ $movie['title'] }}" data-vote-average="{{ $movie['vote_average'] }}" data-release-date="{{ $movie['release_date'] }}">
+                                            <button class="addButton" form="{{ $movie['id'] }}" data-movie-id="{{ $movie['id'] }}" data-title="{{ $movie['title'] }}" data-vote-average="{{ $movie['vote_average'] }}" data-release-date="{{ $movie['release_date'] }}" data-poster-path="{{ $movie['poster_path'] }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                                     <g id="Icon_feather-plus" data-name="Icon feather-plus" transform="translate(-6 -6)">
                                                         <path id="Path_1" data-name="Path 1" d="M18,7.5v21" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
@@ -83,52 +77,5 @@
             </div>
             <x-footer/>
         </main>
-        <script>
-            // Attach a click event handler to all buttons with the class "addButton"
-            const addButtonElements = document.querySelectorAll('.addButton');
-
-            addButtonElements.forEach(button => {
-                button.addEventListener('click', function(event) {
-                    // Prevent the default button behavior (form submission)
-                    event.preventDefault();
-
-                    // Get the movie ID and other data from the data attributes
-                    const movieId = button.getAttribute('data-movie-id');
-                    const voteAverage = button.getAttribute('data-vote-average');
-                    const title = button.getAttribute('data-title');
-                    const releaseDate = button.getAttribute('data-release-date');
-
-                    // Create an object to hold the data
-                    const data = {
-                        movieId: movieId,
-                        voteAverage: voteAverage,
-                        title: title,
-                        releaseDate: releaseDate
-                    };
-
-                    // Perform an AJAX request to handle the "Add" action
-                    fetch(`/create`, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data), // Send the data object
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            // Handle the response data, e.g., display a success message
-                            this.classList.add('added');
-                            this.disabled = true;
-                            console.log(data.message);
-                        })
-                        .catch(error => {
-                            // Handle any errors
-                            console.error(error);
-                        });
-                });
-            });
-        </script>
-
     </body>
 </html>

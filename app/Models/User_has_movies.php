@@ -16,8 +16,14 @@ class User_has_movies extends Model
     protected $fillable = [
         'user_id',
         'movie_id',
-        'user_priority' => '1',
+        'user_priority',
+        'watched',
     ];
 
-    protected $attributes = [ 'user_priority' => 0 ];
+    protected $casts = [
+        'watched' => 'boolean',
+    ];
+
+    public $priority = 'user_priority';
+    public $watched = 'watched';
 }

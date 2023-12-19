@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->float('rating');
             $table->date('date_of_release');
+            $table->string('poster_path');
         });
     }
 

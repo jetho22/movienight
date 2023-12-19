@@ -112,18 +112,39 @@
                 justify-content: center;
                 opacity: 0.1;
                 position: absolute;
-                top: 1rem;
-                right: 1rem;
+                top: 18.75rem;
+                right: 0.75rem;
                 width: 2rem;
 
                 svg {
                     height: 0.8rem;
                     width: 0.8rem;
                 }
+
+                &:before {
+                    mix-blend-mode: difference;
+                    color: white;
+                    opacity: 0;
+                    transform: translateY(1rem);
+                }
+
+                &:hover {
+                    &:before {
+                        display: block;
+                        content: 'Add to watchlist';
+                        position: absolute;
+                        left: -4rem;
+                        opacity: 1;
+                        transition: 0.25s;
+                        transition-delay: 1s;
+                        transform: translateY(0);
+                        width: fit-content;
+                    }
+                }
             }
 
             .addButton.added {
-                background-color: lightgreen;
+                background-color: var(--green);
                 mix-blend-mode: normal;
                 opacity: 1;
             }

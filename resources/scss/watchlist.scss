@@ -26,3 +26,30 @@
         flex: 1;
     }
 }
+
+.watchedButton {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 1rem;
+    cursor: pointer;
+    height: 2rem;
+    bottom: 5.5rem;
+    position: absolute;
+    right: 1rem;
+    opacity: 0.1;
+    width: 2rem;
+
+    svg {
+        width: 0.7rem;
+    }
+}
+
+.watchedButton.watched {
+    background-color: var(--green);
+    border: none;
+    opacity: 1;
+}
+
+.movie-container:hover .watchedButton {
+    opacity: 1;
+}

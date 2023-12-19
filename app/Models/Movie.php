@@ -18,5 +18,6 @@ class Movie extends Model
         'title',
         'rating',
         'date_of_release',
+        'poster_path',
     ];
 }

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
-use App\Models\Movies_genres;
+use Illuminate\Support\Facades\DB;
 use App\Models\User_has_movies;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +31,7 @@ class MovieController extends Controller
         });
 
         $user = Auth::user(); // Get the authenticated user
+
         if ($user) {
             $userId = $user->id;
             $usersMovies = User_has_movies::where('user_id', $userId)->pluck('movie_id')->all();
@@ -40,7 +40,7 @@ class MovieController extends Controller
             $userMovieIds = [];
         }
 
-        //dump($userMovieIds);
+        //dump($popularMovies);
 
         return view('index', [
             'popularMovies' => $popularMovies,
@@ -103,15 +103,18 @@ class MovieController extends Controller
         $movie_id = $movie->id;
         $user = Auth::user(); // Get the authenticated user
         $userId = $user->id;
+
         $userHasMovie = User_has_movies::where('user_id', $userId)->where('movie_id', $movie_id)->exists();
 
         if ($userHasMovie) {
             return response()->json(['message' => 'User already added this movie']);
         } else {
             // Update the user_has_movies table with the new movie/user relationship
+            $priority = User_has_movies::where('user_id', $userId)->max('user_priority') + 1;
             $user_has_movie = new User_has_movies();
             $user_has_movie->user_id = $userId;
             $user_has_movie->movie_id = $movie_id;
+            $user_has_movie->user_priority = $priority;
             $user_has_movie->save();
         }
         return response()->json(['message' => 'New movie added to user\'s watchlist']);
@@ -131,12 +134,14 @@ class MovieController extends Controller
             $voteAverage = $request->input('voteAverage');
             $title = $request->input('title');
             $releaseDate = $request->input('releaseDate');
+            $posterPath = $request->input('posterPath');
 
             $movie = new Movie();
             $movie->movie_id = $movieId;
             $movie->rating = $voteAverage;
             $movie->title = $title;
             $movie->date_of_release = $releaseDate;
+            $movie->poster_path = $posterPath;
 
             // Save the movie record to the database.
             $movie->save();
