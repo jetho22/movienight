@@ -39,6 +39,14 @@
                                 </svg>
                             </button>
                             @endif
+                            <button class="removeButton" data-movie-id="{{$movie->id}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19.092" height="19.092" viewBox="0 0 19.092 19.092">
+                                    <g id="Icon_feather-plus" data-name="Icon feather-plus" transform="translate(9.546 -15.91) rotate(45)">
+                                        <path id="Path_5" data-name="Path 5" d="M18,7.5v21" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                        <path id="Path_6" data-name="Path 6" d="M7.5,18h21" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+                                    </g>
+                                </svg>
+                            </button>
                         <a class="poster">
                             <img
                                 src="{{ 'https://image.tmdb.org/t/p/w500/'.$movie['poster_path'] }}"

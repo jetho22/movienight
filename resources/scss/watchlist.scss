@@ -27,13 +27,14 @@
     }
 }
 
+.removeButton,
 .watchedButton {
     background-color: white;
     border: 1px solid black;
     border-radius: 1rem;
     cursor: pointer;
     height: 2rem;
-    bottom: 5.5rem;
+    bottom: 4.5rem;
     position: absolute;
     right: 1rem;
     opacity: 0.1;
@@ -42,6 +43,17 @@
     svg {
         width: 0.7rem;
     }
+}
+
+.removeButton {
+    background-color: black;
+    border: none;
+    right: 3.5rem;
+    opacity: 0.1;
+}
+
+.movie-container:hover .removeButton {
+    opacity: 1;
 }
 
 .watchedButton.watched {

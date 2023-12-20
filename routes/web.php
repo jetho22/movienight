@@ -47,3 +47,5 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('/updateWatched', [UserController::class, 'updateWatched'])->name('updateWatched');
+
+Route::post('/removeMovie', [UserController::class, 'removeMovie'])->name('removeMovie');

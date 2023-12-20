@@ -69,4 +69,20 @@ class UserController extends Controller
             return response()->json(['message' => 'Record not found'], 404);
         }
     }
+
+    public function removeMovie(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $movieId = $request->input('movieId');
+        $userId = auth()->user()->id;
+        $userMovie = User_has_movies::where('user_id', $userId)
+            ->where('movie_id', $movieId)->first();
+
+        if ($userMovie) {
+            User_has_movies::where('user_id', $userId)
+                ->where('movie_id', $movieId)->delete();
+            return response()->json(['message' => 'Removed movie updated']);
+        } else {
+            return response()->json(['message' => 'Record not found'], 404);
+        }
+    }
 }
