@@ -14,23 +14,21 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $popularMovies =
-            Http::withToken(config('services.tmdb.api'))
+        $movies = Http::withToken(config('services.tmdb.api'))
             ->get('https://api.themoviedb.org/3/movie/popular')
             ->json()['results'];
 
-        $genresArray =
-            Http::withToken(config('services.tmdb.api'))
-                ->get('https://api.themoviedb.org/3/genre/movie/list')
-                ->json()['genres'];
+        $genresArray = Http::withToken(config('services.tmdb.api'))
+            ->get('https://api.themoviedb.org/3/genre/movie/list')
+            ->json()['genres'];
 
         $genres = collect($genresArray)->mapWithKeys(function ($genre) {
-           return [$genre['id'] => $genre['name']];
+            return [$genre['id'] => $genre['name']];
         });
 
-        $user = Auth::user(); // Get the authenticated user
+        $user = Auth::user();
 
         if ($user) {
             $userId = $user->id;
@@ -40,15 +38,14 @@ class MovieController extends Controller
             $userMovieIds = [];
         }
 
-        //dump($popularMovies);
-
         return view('index', [
-            'popularMovies' => $popularMovies,
+            'movies' => $movies,
             'allGenres' => $genresArray,
             'genres' => $genres,
             'usersMovies' => $userMovieIds,
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.

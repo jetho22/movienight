@@ -55,3 +55,43 @@ function add(movieId, voteAverage, title, releaseDate, posterPath, button) {
             console.error(error);
         });
 }
+
+document.querySelector('.searchForm').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        e.preventDefault(); // Prevents the default form submission
+        document.getElementById('searchForm').submit(); // Manually submit the form
+    }
+});
+
+document.querySelector('.searchForm').addEventListener('submit', function (event) {
+    const searchForm = document.getElementById('searchForm');
+
+    searchForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(searchForm);
+
+        // Make the AJAX request using the Fetch API
+    fetch('/search', {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest', // Add this header for Laravel to recognize AJAX requests
+        },
+        body: formData,
+    })
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            // Handle the success response, update the view, etc.
+            console.log('Ajax request successful', data);
+        })
+        .catch(function (error) {
+            // Handle errors
+            console.error('Ajax request failed:', error);
+        });
+    });
+});

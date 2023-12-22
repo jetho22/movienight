@@ -31,10 +31,12 @@
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    z-index: 100;
 }
 
 .logo-container {
     margin-right: 3rem;
+    z-index: 100;
 
     a { display: flex; }
 
@@ -70,6 +72,23 @@
                 text-decoration: none;
             }
         }
+    }
+
+    .search-item {
+        position: relative;
+    }
+
+    .search-item:before {
+        background-image: url("/public/search-icon.png");
+        background-size: cover;
+        content: '';
+        height: .9rem;
+        left: -1.5rem;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: .9rem;
+        z-index: 99;
     }
 }
 

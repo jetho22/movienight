@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,3 +50,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/updateWatched', [UserController::class, 'updateWatched'])->name('updateWatched');
 
 Route::post('/removeMovie', [UserController::class, 'removeMovie'])->name('removeMovie');
+
+Route::get('/search', [SearchController::class, 'index'])->name('search.index');
+
