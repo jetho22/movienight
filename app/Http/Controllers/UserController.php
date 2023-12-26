@@ -6,6 +6,7 @@ use App\Models\Movie;
 use App\Models\User_has_movies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +14,43 @@ class UserController extends Controller
 {
     //
     public function index() {
+        $user = Auth::user();
+        $userId = $user->id;
+        $userMovies = User_has_movies::where('user_id', $userId)->get();
+
+        // Get an array of movie_ids from the user_movies
+        $movieIds = $userMovies->pluck('movie_id')->all();
+
+        // Fetch movies based on the movie_ids
+        $movies = Movie::whereIn('id', $movieIds)->get();
+
+        // Add a 'watched' column with a boolean value to the movies array
+        $movies = $movies->map(function ($movie) use ($userMovies) {
+            // Find the corresponding user_movie
+            $userMovie = $userMovies->where('movie_id', $movie->id)->first();
+
+            // Add the 'watched' column with a boolean value
+            $movie['watched'] =  DB::table('user_has_movies')->where('movie_id', $movie->id)->value('watched');
+
+            return $movie;
+        });
+
+        if ($movies->count() === 0) {
+            $movies = collect(); // Create an empty collection
+        }
+
+        //dump($movies);
+
+        return view('watchlist', [
+            'movies' => $movies,
+        ]);
+    }
+
+    public function localizedIndex(string $locale) {
+        if (! in_array($locale, ['en', 'es'])) {
+            abort(400);
+        }
+        App::setLocale($locale);
         $user = Auth::user();
         $userId = $user->id;
         $userMovies = User_has_movies::where('user_id', $userId)->get();

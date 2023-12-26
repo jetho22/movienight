@@ -1,4 +1,13 @@
 # MovieNight
+To run the web application:
+```
+php artisan serve
+```
+and
+```
+npm run dev
+```
+
 
 Git workflow for group 12
 

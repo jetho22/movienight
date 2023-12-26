@@ -22,21 +22,21 @@
 <main class="main">
     <div class="page">
         <header class="header">
-            <a href="/">Back to home page</a>
-            <h1>Register account</h1>
+            <a href="{{ route('movies.index.localized', app()->getLocale()) }}">{{__('messages.back-home')}}</a>
+            <h1>{{__('messages.register')}}</h1>
         </header>
         <form class="register-form" id="register" method="post" action="{{ route('register') }}">
             @csrf
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Name">
-            <label for="username">Username</label>
-            <input id="username" name="username" type="text" placeholder="Username">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="Email" value="{{ old('email') }}">
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="Password">
-            <input type="submit" form="register" value="Register" class="register-button" id="submit-button" disabled/>
-            <div class="register">Already a user? Login <a href="/login">here.</a></div>
+            <label for="name">{{__('messages.name')}}</label>
+            <input id="name" name="name" type="text" placeholder="{{__('messages.name')}}">
+            <label for="username">{{__('messages.username')}}</label>
+            <input id="username" name="username" type="text" placeholder="{{__('messages.username')}}">
+            <label for="email">{{__('messages.email')}}</label>
+            <input id="email" name="email" type="email" placeholder="{{__('messages.email')}}" value="{{ old('email') }}">
+            <label for="password">{{__('messages.password')}}</label>
+            <input id="password" name="password" type="password" placeholder="{{__('messages.password')}}">
+            <input type="submit" form="register" value="{{__('messages.register-button')}}" class="register-button" id="submit-button" disabled/>
+            <div class="register">{ !! __('messages.have-user') !! }</div>
             @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
             @endif

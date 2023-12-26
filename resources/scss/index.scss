@@ -59,6 +59,7 @@
         width: 100%;
     }
 
+
     button:hover {
         border: 1px solid white;
         cursor: pointer;
@@ -131,7 +132,7 @@
                 &:hover {
                     &:before {
                         display: block;
-                        content: 'Add to watchlist';
+                        content: var(--add-to-watchlist);
                         position: absolute;
                         left: -4rem;
                         opacity: 1;
@@ -155,3 +156,4 @@
         }
     }
 }
+

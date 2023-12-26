@@ -21,7 +21,7 @@
 <body class="background font-color">
     <main class="main">
         <x-navbar />
-        <h1>Your Watchlist</h1>
+        <h1>{{__('messages.watchlist')}}</h1>
         <div class="movies-list">
             <div class="inner">
                 @foreach ($movies as $movie)

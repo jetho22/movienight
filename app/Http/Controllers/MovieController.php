@@ -8,6 +8,7 @@ use App\Models\User_has_movies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 
 class MovieController extends Controller
 {
@@ -42,6 +43,40 @@ class MovieController extends Controller
 
         //dump($popularMovies);
 
+        return view('index', [
+            'popularMovies' => $popularMovies,
+            'allGenres' => $genresArray,
+            'genres' => $genres,
+            'usersMovies' => $userMovieIds,
+        ]);
+    }
+
+    // Have to create a new method for localization, this way we can easy call
+    public function localizedIndex(string $locale)
+    {
+    if (! in_array($locale, ['en', 'es'])) {
+        abort(400);
+    }
+    App::setLocale($locale);
+        $popularMovies =
+            Http::withToken(config('services.tmdb.api'))
+                ->get('https://api.themoviedb.org/3/movie/popular')
+                ->json()['results'];
+        $genresArray =
+            Http::withToken(config('services.tmdb.api'))
+                ->get('https://api.themoviedb.org/3/genre/movie/list')
+                ->json()['genres'];
+        $genres = collect($genresArray)->mapWithKeys(function ($genre) {
+            return [$genre['id'] => $genre['name']];
+        });
+        $user = Auth::user(); // Get the authenticated user
+        if ($user) {
+            $userId = $user->id;
+            $usersMovies = User_has_movies::where('user_id', $userId)->pluck('movie_id')->all();
+            $userMovieIds = Movie::whereIn('id', $usersMovies)->get();
+        } else {
+            $userMovieIds = [];
+        }
         return view('index', [
             'popularMovies' => $popularMovies,
             'allGenres' => $genresArray,

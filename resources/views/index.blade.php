@@ -25,13 +25,20 @@
                     <input class="searchbar" type="text" placeholder="What are you searching for?">
                 </label> --}}
                 <div class="movies-list">
-                    <div class="movies-list-header">Showing: popular movies</div>
+                    <div class="movies-list-header">{{__('messages.movies-header')}}</div>
                     <div class="inner">
                         @foreach($popularMovies as $movie)
                             <div class="movie-container">
                                 @auth
                                     @if ($usersMovies->contains('movie_id', $movie['id']))
-                                            <button class="addButton added" form="{{ $movie['id'] }}" data-movie-id="{{ $movie['id'] }}" data-title="{{ $movie['title'] }}" data-vote-average="{{ $movie['vote_average'] }}" data-release-date="{{ $movie['release_date'] }}" data-poster-path="{{ $movie['poster_path'] }}">
+
+                                        <!-- Here we have to add a custom property
+                                        to be able to localize this "Add to watchlist"-string -->
+                                        <style>
+                                            :root {--add-to-watchlist: "{{ __('messages.add-watchlist') }}";
+                                            }
+                                        </style>
+                                        <button class="addButton added" form="{{ $movie['id'] }}" data-movie-id="{{ $movie['id'] }}" data-title="{{ $movie['title'] }}" data-vote-average="{{ $movie['vote_average'] }}" data-release-date="{{ $movie['release_date'] }}" data-poster-path="{{ $movie['poster_path'] }}" title="{{ __('messages.add-watchlist') }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                                     <g id="Icon_feather-plus" data-name="Icon feather-plus" transform="translate(-6 -6)">
                                                         <path id="Path_1" data-name="Path 1" d="M18,7.5v21" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
@@ -83,5 +90,8 @@
             </div>
             <x-footer/>
         </main>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="..." crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="..." crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="..." crossorigin="anonymous"></script>
     </body>
 </html>

@@ -22,17 +22,17 @@
 <main class="main">
     <div class="page">
         <header class="header">
-            <a href="/">Back to home page</a>
-            <h1>Log in</h1>
+            <a href="{{ route('movies.index.localized', app()->getLocale()) }}">{{__('messages.back-home')}}</a>
+            <h1>{{__('messages.login')}}</h1>
         </header>
         <form class="login-form" id="login" method="post" action="{{ route('authenticate') }}">
             @csrf
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="email" value="{{ old('email') }}">
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="password">
-            <input type="submit" form="login" value="login" class="login-button" id="submit-button" disabled/>
-            <div class="register">Don't have a user? Register <a href="/register">here.</a></div>
+            <label for="email">{{__('messages.email')}}</label>
+            <input id="email" name="email" type="email" placeholder="{{__('messages.email')}}" value="{{ old('email') }}">
+            <label for="password">{{__('messages.password')}}</label>
+            <input id="password" name="password" type="password" placeholder="{{__('messages.password')}}">
+            <input type="submit" form="login" value="{{__('messages.login-button')}}" class="login-button" id="submit-button" disabled/>
+            <div class="register">{!! __('messages.no-user') !!}</div>
             @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
             @endif
