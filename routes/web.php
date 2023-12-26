@@ -5,6 +5,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/updateWatched', [UserController::class, 'updateWatched'])->name('updateWatched');
 
 Route::post('/removeMovie', [UserController::class, 'removeMovie'])->name('removeMovie');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/watchlists', [AdminController::class, 'index'])->name('admin.watchlists.index');});
+
+Route::delete('/admin/watchlists/{user}/movies/{movie}', [AdminController::class, 'removeMovieFromWatchlist'])->name('admin.remove-movie');
