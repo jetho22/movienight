@@ -21,17 +21,17 @@
 <main class="main">
     <div class="page">
         <header class="header">
-            <a href="/">Back to home page</a>
-            <h1>Log in</h1>
+            <a href="/">{{__("Back to home page")}}</a>
+            <h1>{{__("Log In")}}</h1>
         </header>
         <form class="login-form" id="login" method="post" action="{{ route('authenticate') }}">
             @csrf
             <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="email" value="{{ old('email') }}">
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="password">
-            <input type="submit" form="login" value="login" class="login-button" id="submit-button" disabled/>
-            <div class="register">Don't have a user? Register <a href="/register">here.</a></div>
+            <input id="email" name="email" type="email" placeholder="Email" value="{{ old('email') }}">
+            <label for="password">{{__("Password")}}</label>
+            <input id="password" name="password" type="password" placeholder={{__("Password")}}>
+            <input type="submit" form="login" value={{__("Login")}} class="login-button" id="submit-button" disabled/>
+            <div class="register">{{__("Don't have a user? Register")}} <a href="/register">{{__("here")}}.</a></div>
             @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
             @endif

@@ -10,12 +10,15 @@
     "Password": "Adgangskode",
     "Your Password": "Din adgangskode",
     "Register": "Registrer",
-    "Already a user?": "Allerede bruger?",
+    "Already a user? Login": "Allerede bruger? Log ind",
     "Login here.": "Log ind her.",
     "Movies": "Film",
     "Your Watchlist": "Din Watchlist",
     "Log In": "Log Ind",
     "Log out": "Log ud",
     "Movienight | Watchlist": "Movienight | Wathclist",
-    "Create watch lists for your movie nights": "Opret watchlist til dine filmaftener"
+    "Create watch lists for your movie nights": "Opret watchlist til dine filmaftener",
+    "Don't have a user? Register": "Har du ikke en bruger? Registrer",
+    "here": "her",
+    "Login": "Log-ind"
 }

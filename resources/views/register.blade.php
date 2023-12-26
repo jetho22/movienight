@@ -35,7 +35,7 @@
             <label for="password">{{__("Password")}}</label>
             <input id="password" name="password" type="password" placeholder={{__("Password")}}>
             <input type="submit" form="register" value={{__("Register")}} class="register-button" id="submit-button" disabled/>
-            <div class="register">{{__("Already a user? Login")}} <a href="/login">here.</a></div>
+            <div class="register">{{__("Already a user? Login")}} <a href="/login">{{__("here")}}.</a></div>
             @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
             @endif
