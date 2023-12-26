@@ -65,7 +65,7 @@
                                 </button>
                             @endif
                         @endauth
-                        <a class="poster">
+                        <a class="poster" href="{{ route('movies.show', ['id' => $movie['id']]) }}">
                             <img
                                 src="{{ 'https://image.tmdb.org/t/p/w500/'.$movie['poster_path'] }}"
                                 alt="{{ 'Poster for '.$movie['title'] }}"

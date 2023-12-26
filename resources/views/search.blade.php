@@ -23,7 +23,11 @@
     <div class="page">
         @if($movies)
         <div class="movies-list">
-            <h1 class="h1">Search result:</h1>
+            @if(count($movies) > 1)
+                <h1 class="h1">Search results for "{{$query}}"</h1>
+            @else
+                <h1 class="h1">Search result for "{{$query}}"</h1>
+            @endif
             <div class="inner">
                     @foreach($movies as $movie)
                         <div class="movie-container">
@@ -66,7 +70,7 @@
                                     </button>
                                 @endif
                             @endauth
-                            <a class="poster">
+                            <a class="poster" href="{{ route('movies.show', ['id' => $movie['id']]) }}">
                                 <img
                                     src="{{ 'https://image.tmdb.org/t/p/w500/'.$movie['poster_path'] }}"
                                     alt="{{ 'Poster for '.$movie['title'] }}"
@@ -99,10 +103,31 @@
             </div>
         </div>
         @else
+        @if($query)
             <div class="noResults">
-                <h1>No results for "{{$query}}". Sorry</h1>
+                @csrf
+                <form method="get" class="searchForm" action="{{ route('search.index') }}" id="searchForm">
+                    <label class="label">
+                        <input class="searchbar" type="text" name="query" placeholder="What are you searching for?">
+                    </label>
+                    <button class="searchbarButton" type="submit">Search</button>
+                </form>
+                <h1>No results for "{{$query}}"</h1>
                 <div class="shrugEmoji">¯\_(ツ)_/¯</div>
+                <p>Try and search for something else</p>
             </div>
+            @else
+            <div class="noResults">
+                <h1>Search for something.</h1>
+                @csrf
+                <form method="get" class="searchForm" action="{{ route('search.index') }}" id="searchForm">
+                    <label class="label">
+                        <input class="searchbar" type="text" name="query" placeholder="What are you searching for?">
+                    </label>
+                    <button class="searchbarButton" type="submit">Search</button>
+                </form>
+            </div>
+        @endif
         @endif
     </div>
     <x-footer/>

@@ -1,0 +1,125 @@
+.movie {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1024px;
+}
+
+.movie-poster {
+    border-radius: 1rem;
+    overflow: hidden;
+    flex: 2;
+    position: relative;
+
+    img {
+        height: auto;
+        width: 100%;
+    }
+
+    .poster img {
+        border-radius: 4px;
+        height: auto;
+        width: 100%;
+    }
+}
+
+.inner {
+    flex: 3;
+    padding-left: 6rem;
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        margin-top: 2rem;
+        font-size: 1.05rem;
+        font-weight: normal;
+        text-decoration: underline;
+        text-underline-offset: 0.33rem;
+    }
+
+    .movie-info {
+        font-size: .8rem;
+
+        .details {
+            display: flex;
+
+            span {
+                margin-right: .25rem
+            }
+        }
+
+        .featured-cast {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+            .cast {
+                font-size: .8rem;
+                width: 150px;
+            }
+        }
+
+        .movie-trailer {
+            display: inline-block;
+        }
+
+        .added,
+        .addButton,
+        .movie-trailer a {
+            background-color: var(--orange);
+            border-radius: .25rem;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 2rem;
+            padding: .75rem 1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            text-align: center;
+            //width: 125px;
+
+            &:hover {
+                background-color: var(--orange-lighter);
+            }
+
+            svg {
+                height: 0.7rem;
+                width: 0.7rem;
+
+                g path {
+                    stroke: var(--white);
+                }
+            }
+        }
+
+        .addButton {
+            background-color: var(--green);
+            color: var(--main);
+            //width: 200px;
+
+            &:hover {
+                background-color: var(--green-hover);
+            }
+        }
+
+        .added {
+            background-color: var(--green);
+            color: var(--main);
+            cursor: default;
+
+            &:hover {
+                background-color: var(--green);
+            }
+        }
+    }
+
+    p {
+        margin-top: 1.5rem;
+        font-size: 1.05rem;
+        line-height: 1.5;
+    }
+}

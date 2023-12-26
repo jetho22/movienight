@@ -47,53 +47,38 @@ class MovieController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        // Retrieve the movie data from the database or any other source
+        $movie = Http::withToken(config('services.tmdb.api'))
+            ->get('https://api.themoviedb.org/3/movie/'.$id.'?append_to_response=videos,credits')->json();
+
+        $genresArray = Http::withToken(config('services.tmdb.api'))
+            ->get('https://api.themoviedb.org/3/genre/movie/list')
+            ->json()['genres'];
+
+        $genres = collect($genresArray)->mapWithKeys(function ($genre) {
+            return [$genre['id'] => $genre['name']];
+        });
+
+        $user = Auth::user();
+
+        if ($user) {
+            $userId = $user->id;
+            $usersMovies = User_has_movies::where('user_id', $userId)->pluck('movie_id')->all();
+            $userMovieIds = Movie::whereIn('id', $usersMovies)->get();
+        } else {
+            $userMovieIds = [];
+        }
+
+        return view('show', [
+            'allGenres' => $genresArray,
+            'genres' => $genres,
+            'usersMovies' => $userMovieIds,
+            'movie' => $movie
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 
     public function addMovie(Request $request) {
         $movie = $this->createMovie($request);

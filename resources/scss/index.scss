@@ -161,7 +161,7 @@
                 justify-content: center;
                 opacity: 0.1;
                 position: absolute;
-                top: 20.25rem;
+                top: 1rem;
                 right: 0.75rem;
                 width: 2rem;
 
@@ -213,6 +213,10 @@
     height: 65vh;
     justify-content: center;
     font-family: monospace;
+
+    h1 {
+        margin-top: 2.5rem;
+    }
 
     .shrugEmoji {
         font-size: 100px;

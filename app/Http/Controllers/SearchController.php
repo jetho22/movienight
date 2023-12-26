@@ -51,4 +51,19 @@ class SearchController extends Controller
             'usersMovies' => $userMovieIds,
         ]);
     }
+
+    public function suggestions(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $query = $request->input('query');
+
+        $response = Http::withToken(config('services.tmdb.api'))
+            ->get('https://api.themoviedb.org/3/search/movie', [
+                'query' => $query,
+            ]);
+
+        $suggestions = $response->json()['results'];
+
+        return response()->json(['suggestions' => $suggestions]);
+    }
+
 }

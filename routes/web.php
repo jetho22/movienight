@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MovieController::class, 'index'])->name('movies.index');
 
-Route::get('/movie/{movie}', [MovieController::class, 'show'])->name('movies.show');
+Route::get('/movie/{id}', [MovieController::class, 'show'])->name('movies.show');
 
 Route::get('/watchlist', [UserController::class, 'index'])->middleware('auth')->name('watchlist');
 
@@ -52,4 +52,7 @@ Route::post('/updateWatched', [UserController::class, 'updateWatched'])->name('u
 Route::post('/removeMovie', [UserController::class, 'removeMovie'])->name('removeMovie');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
+
+Route::get('/suggestions', [SearchController::class, 'suggestions'])->name('suggestions');
+
 

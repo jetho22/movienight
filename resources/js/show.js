@@ -49,6 +49,7 @@ function add(movieId, voteAverage, title, releaseDate, posterPath, button) {
             button.classList.add('added');
             button.disabled = true;
             console.log(data.message);
+            location.reload();
         })
         .catch(error => {
             // Handle any errors
@@ -67,39 +68,31 @@ document.querySelector('.searchForm').addEventListener('submit', function (event
     const searchForm = document.getElementById('searchForm');
 
     searchForm.addEventListener('submit', function (event) {
-    event.preventDefault();
+        event.preventDefault();
 
-    const formData = new FormData(searchForm);
+        const formData = new FormData(searchForm);
 
         // Make the AJAX request using the Fetch API
-    fetch('/search', {
-        method: 'GET',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest', // Add this header for Laravel to recognize AJAX requests
-        },
-        body: formData,
-    })
-        .then(function (response) {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
+        fetch('/search', {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest', // Add this header for Laravel to recognize AJAX requests
+            },
+            body: formData,
         })
-        .then(function (data) {
-            // Handle the success response, update the view, etc.
-            console.log('Ajax request successful', data);
-        })
-        .catch(function (error) {
-            // Handle errors
-            console.error('Ajax request failed:', error);
-        });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const addButton = document.getElementById('addButton');
-    addButton.addEventListener('click', function(event) {
-        event.preventDefault();
-        location.reload();
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                // Handle the success response, update the view, etc.
+                console.log('Ajax request successful', data);
+            })
+            .catch(function (error) {
+                // Handle errors
+                console.error('Ajax request failed:', error);
+            });
     });
 });

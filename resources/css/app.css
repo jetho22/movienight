@@ -22,10 +22,16 @@ body {
 
 :root {
     --pink: rgb(255, 71, 225);
+    --pink-lighter: rgb(255, 106, 225);
+    --orange: rgb(250, 46, 119);
+    --orange-lighter: rgb(255, 79, 141);
+    --red: rgb(243, 30, 30);
+    --red-hover: rgb(245, 60, 60);
     --white: rgb(255, 255, 255);
     --main: rgb(10, 2, 38);
     --main-lighter: rgb(16, 7, 56);
     --main-lighter-hover: rgb(29, 15, 91);
     --green: #32ff53;
+    --green-hover: #24d240;
     --black: #000;
 }

@@ -28,9 +28,10 @@
         @csrf
         <form method="get" class="searchForm" action="{{ route('search.index') }}" id="searchForm">
             <label class="label">
-                <input class="searchbar" type="text" name="query" placeholder="What are you searching for?">
+                <input class="searchbar" id="searchBar" type="text" name="query" placeholder="What are you searching for?">
             </label>
             <button class="searchbarButton" type="submit">Search</button>
         </form>
+        {{-- <div class="suggestions-container" id="suggestions-container"></div> --}}
     </div>
 </header>
