@@ -14,7 +14,7 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function authenticate(Request $request): RedirectResponse
+    public function authenticate(Request $request, string $locale): RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -22,9 +22,10 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            // local variable to ensure we are redirected with the correct locale
+            $login = "/$locale/";
             $request->session()->regenerate();
-
-            return redirect()->intended('/');
+            return redirect()->intended($login);
         }
 
         return back()->withErrors([
@@ -36,14 +37,18 @@ class LoginController extends Controller
      * Log out the user from application.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param string $locale
      * @return \Illuminate\Http\Response
      */
-    public function logout(Request $request): RedirectResponse
+    public function logout(Request $request, string $locale): RedirectResponse
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->intended('/')
+        // local variable to ensure we are redirected with the correct locale
+        $logout = "/$locale/";
+
+        return redirect()->intended($logout)
             ->withSuccess('You have logged out successfully!');
     }
 }

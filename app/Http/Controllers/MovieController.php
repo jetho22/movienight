@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use App\Models\User_has_movies;
 use Illuminate\Http\Request;
@@ -182,6 +183,14 @@ class MovieController extends Controller
             $movie->save();
             return $movie;
         }
+    }
+
+    public function changeLocale($locale): RedirectResponse
+    {
+        if (in_array($locale, ['en', 'es'])) {
+            session(['locale' => $locale]);
+        }
+        return redirect()->back();
     }
 }
 

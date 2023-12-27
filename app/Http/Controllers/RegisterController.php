@@ -17,7 +17,7 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request): RedirectResponse
+    public function register(Request $request, string $locale): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string'],
@@ -38,8 +38,10 @@ class RegisterController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            // local variable to ensure we are redirected with the correct locale
+            $registerurl = "/$locale/";
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended($registerurl);
         }
         return back()->withErrors([
             'email' => 'The provided email already matches an account in our records.',

@@ -25,7 +25,7 @@
             <a href="{{ route('movies.index.localized', app()->getLocale()) }}">{{__('messages.back-home')}}</a>
             <h1>{{__('messages.register')}}</h1>
         </header>
-        <form class="register-form" id="register" method="post" action="{{ route('register') }}">
+        <form class="register-form" id="register" method="post" action="{{ url(route('register', app()->getLocale())) }}">
             @csrf
             <label for="name">{{__('messages.name')}}</label>
             <input id="name" name="name" type="text" placeholder="{{__('messages.name')}}">
@@ -36,7 +36,7 @@
             <label for="password">{{__('messages.password')}}</label>
             <input id="password" name="password" type="password" placeholder="{{__('messages.password')}}">
             <input type="submit" form="register" value="{{__('messages.register-button')}}" class="register-button" id="submit-button" disabled/>
-            <div class="register">{ !! __('messages.have-user') !! }</div>
+            <div class="register">{!! __('messages.have-user') !!}<a href="{{ route('login', app()->getLocale()) }}">{{__('messages.here')}}</a></div>
             @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
             @endif

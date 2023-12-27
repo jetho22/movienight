@@ -14,8 +14,8 @@
                 <li class="nav-item"> <a class="login-button" href="{{ route('login', app()->getLocale()) }}">{{ __('messages.login') }}</a></li>
                 @else
                 <li class="nav-item">
-                    <a class="login-button" href="{{ route('logout') }}" id="loginSubmit">{{ __('messages.logout') }}</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none">
+                    <a class="login-button" href="{{ route('logout', app()->getLocale()) }}" id="loginSubmit">{{ __('messages.logout') }}</a>
+                    <form id="logout-form" action="{{ route('logout', app()->getLocale()) }}" method="POST" style="display:none">
                         @csrf
                     </form>
                 </li>

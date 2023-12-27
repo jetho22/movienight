@@ -55,7 +55,7 @@ Route::get('/{locale}/register', function (string $locale) {
 })->name('register')->middleware('guest');
 
 Route::controller(\App\Http\Controllers\LoginController::class)->group(function() {
-    Route::post('/authenticate', 'authenticate')->name('authenticate');
+    Route::post('/{locale?}/authenticate', 'authenticate')->name('authenticate');
     Route::post('/logout', 'logout')->name('logout');
 });
 
@@ -63,9 +63,9 @@ Route::get('/change-locale/{locale}', [MovieController::class, 'changeLocale'])-
 
 Route::post('/create', [MovieController::class, 'addMovie'])->name('movies.create');
 
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/{locale?}/register', [RegisterController::class, 'register'])->name('register');
 
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout/{locale?}', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('/updateWatched', [UserController::class, 'updateWatched'])->name('updateWatched');
 

@@ -8,13 +8,14 @@ return [
     'email' => 'Correo electrónico',
     'password' => 'Contraseña',
     'login-button' => 'Iniciar sesión',
-    'no-user' => '¿No tienes cuenta? Regístrate <a href="/register">aquí.</a>',
+    'no-user' => '¿No tienes cuenta? Regístrate ',
     'register' => 'Regístrate',
     'name' => 'Nombre',
     'username' => 'Nombre de usuario',
     'register-button' => 'Regístrate',
-    'have-user' => '¿Ya tienes cuenta? Iniciar sesión <a href="/login">aquí.</a>',
+    'have-user' => '¿Ya tienes cuenta? Iniciar sesión ',
     'watchlist' => 'Tu lista',
     'logout' => 'Cerrar sesión',
-    'add-watchlist' => 'Añadir a tu lista'
+    'add-watchlist' => 'Añadir a tu lista',
+    'here' => 'aquí.'
 ];
