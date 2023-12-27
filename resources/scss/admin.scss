@@ -1,0 +1,29 @@
+// admin.scss
+
+.deleteButton {
+    position: relative; /* Change to relative positioning */
+    float: left; /* Add float to move the button to the left */
+    background-color: #ff4136;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 10px; /* Add margin to separate button from title */
+    opacity: 0.7;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+h3 {
+    margin-left: 10px; /* Add margin to separate title from button */
+}
+
+.user-watchlist {
+    position: relative;
+    // other styles...
+}
+
+// Continue with other styles as needed

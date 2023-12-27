@@ -1,4 +1,4 @@
-@vite(['resources/scss/app.scss', 'resources/scss/watchlist.scss', 'resources/scss/index.scss', 'resources/css/app.css', 'resources/js/app.js', 'resources/js/watchlist.js'])
+@vite(['resources/scss/app.scss', 'resources/scss/watchlist.scss', 'resources/scss/index.scss', 'resources/css/app.css', 'resources/js/app.js', 'resources/js/watchlist.js', 'resources/js/admin.js', 'resources/scss/admin.scss'])
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-csrf-token="{{ csrf_token() }}">
@@ -30,12 +30,8 @@
             <ul>
                 @foreach ($user->movies as $movie)
                 <li>
+                    <button class="deleteButton" data-user-id="{{ $user->id }}" data-movie-id="{{ $movie->id }}">Remove</button>
                     <h3>{{ $movie->title }}</h3>
-                    <form action="{{ route('admin.remove-movie', ['user' => $user->id, 'movie' => $movie->id]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Remove</button>
-                    </form>
                 </li>
                 @endforeach
             </ul>

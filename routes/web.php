@@ -52,6 +52,8 @@ Route::post('/updateWatched', [UserController::class, 'updateWatched'])->name('u
 Route::post('/removeMovie', [UserController::class, 'removeMovie'])->name('removeMovie');
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/watchlists', [AdminController::class, 'index'])->name('admin.watchlists.index');});
+    Route::get('/admin/watchlists', [AdminController::class, 'index'])->name('admin.watchlists.index');
+    Route::delete('/admin/watchlists', [AdminController::class, 'index'])->name('admin.watchlists.index');
+});
 
 Route::delete('/admin/watchlists/{user}/movies/{movie}', [AdminController::class, 'removeMovieFromWatchlist'])->name('admin.remove-movie');
