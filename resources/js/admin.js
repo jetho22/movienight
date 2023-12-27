@@ -23,7 +23,6 @@ function removeMovie(userId, movieId, button) {
         .then(response => {
             if (response.ok) {
                 console.log('Movie successfully deleted');
-                // Remove the parent li element from the DOM
                 button.closest('li').remove();
             } else {
                 console.error('Failed to delete due to server error');
