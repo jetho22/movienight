@@ -87,3 +87,13 @@
 .footer {
     margin-top: 6rem;
 }
+.flags {
+    display: flex;
+    list-style: none;
+    margin: 1rem;
+    padding: 0;
+
+    .flag {
+        margin: 5px;
+    }
+}

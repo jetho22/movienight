@@ -3,6 +3,14 @@
     <div class="logo-container">
         <a href="/"><img class="logo" src="{{ asset('movienight-logo.png') }}" alt="Movienight logo"></a>
     </div>
+    <div class="flags">
+        <li class="flag"><a href="/en">
+            <img src="{{ asset('Flag_of_United_Kingdom-4096x2048.png') }}" width="50" height="30">
+        </a></li>
+        <li class="flag"><a href="/es">
+            <img src="{{ asset('Flag_of_Spain-4096x2731.png') }}" width="50" height="30">
+        </a></li>
+    </div>
     <div class="nav-container">
         <nav class="nav">
             <ul class="nav-items">
@@ -24,3 +32,4 @@
         </nav>
     </div>
 </header>
+
