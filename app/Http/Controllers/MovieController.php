@@ -115,6 +115,7 @@ class MovieController extends Controller
             $user_has_movie->user_id = $userId;
             $user_has_movie->movie_id = $movie_id;
             $user_has_movie->user_priority = $priority;
+            $user_has_movie->watched = 0;
             $user_has_movie->save();
         }
         return response()->json(['message' => 'New movie added to user\'s watchlist']);
