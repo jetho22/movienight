@@ -32,6 +32,5 @@
             </label>
             <button class="searchbarButton" type="submit">Search</button>
         </form>
-        {{-- <div class="suggestions-container" id="suggestions-container"></div> --}}
     </div>
 </header>

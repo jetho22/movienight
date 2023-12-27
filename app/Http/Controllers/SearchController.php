@@ -12,6 +12,10 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
+        $request->validate([
+            'query' => 'required|string',
+        ]);
+
         $query = $request->input('query');
 
         if ($query) {
