@@ -74,14 +74,14 @@
                         <div class="movie-info">
                             <h3 class="movie-title">{{ $movie['title'] }}</h3>
                             <div>
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="11.234" height="10.752"
-                                                 viewBox="0 0 11.234 10.752">
-                                              <path id="Icon_awesome-star" data-name="Icon awesome-star"
-                                                    d="M6.456.373,5.085,3.153,2.017,3.6a.672.672,0,0,0-.372,1.146L3.865,6.91,3.34,9.965a.672.672,0,0,0,.974.708L7.058,9.23,9.8,10.673a.672.672,0,0,0,.974-.708L10.252,6.91l2.219-2.163A.672.672,0,0,0,12.1,3.6L9.032,3.153,7.661.373a.673.673,0,0,0-1.205,0Z"
-                                                    transform="translate(-1.441 0.001)" fill="#dba000"/>
-                                            </svg>
-                                        </span>
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="11.234" height="10.752"
+                                         viewBox="0 0 11.234 10.752">
+                                      <path id="Icon_awesome-star" data-name="Icon awesome-star"
+                                            d="M6.456.373,5.085,3.153,2.017,3.6a.672.672,0,0,0-.372,1.146L3.865,6.91,3.34,9.965a.672.672,0,0,0,.974.708L7.058,9.23,9.8,10.673a.672.672,0,0,0,.974-.708L10.252,6.91l2.219-2.163A.672.672,0,0,0,12.1,3.6L9.032,3.153,7.661.373a.673.673,0,0,0-1.205,0Z"
+                                            transform="translate(-1.441 0.001)" fill="#dba000"/>
+                                    </svg>
+                                </span>
                                 <span>{{ $movie['vote_average'] }} | </span>
                                 <span>{{ \Carbon\Carbon::parse($movie['release_date'])->format('M d, Y') }}</span>
                                 <div>

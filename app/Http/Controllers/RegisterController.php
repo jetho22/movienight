@@ -19,6 +19,7 @@ class RegisterController extends Controller
      */
     public function register(Request $request): RedirectResponse
     {
+        // Validate the user details
         $request->validate([
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users,email'],
@@ -27,8 +28,7 @@ class RegisterController extends Controller
 
         ]);
 
-        //$hashedPassword = Hash::make($request->password);
-
+        // Create the new user
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -36,11 +36,16 @@ class RegisterController extends Controller
             'password' => $request->password
         ]);
 
+        // Get the credentials
         $credentials = $request->only('email', 'password');
+
+        // If no errors we register the user
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
+
+        // If there are errors, we return the error
         return back()->withErrors([
             'email' => 'The provided email already matches an account in our records.',
             'password' => 'The provided email already matches an account in our records.',
