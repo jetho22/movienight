@@ -19,19 +19,20 @@ class MovieController extends Controller
         $popularMovies =
             Http::withToken(config('services.tmdb.api'))
             ->get('https://api.themoviedb.org/3/movie/popular')
-            ->json()['results'];
+            ->json()['results']; // popular movies array
 
         $genresArray =
             Http::withToken(config('services.tmdb.api'))
                 ->get('https://api.themoviedb.org/3/genre/movie/list')
-                ->json()['genres'];
+                ->json()['genres']; // genres array
 
         $genres = collect($genresArray)->mapWithKeys(function ($genre) {
-           return [$genre['id'] => $genre['name']];
+           return [$genre['id'] => $genre['name']]; // deconstruct the genres array
         });
 
         $user = Auth::user(); // Get the authenticated user
 
+        // Get the users movie ids from their watchlist
         if ($user) {
             $userId = $user->id;
             $usersMovies = User_has_movies::where('user_id', $userId)->pluck('movie_id')->all();
@@ -40,8 +41,9 @@ class MovieController extends Controller
             $userMovieIds = [];
         }
 
-        //dump($popularMovies);
+        //dump($popularMovies); // Dump the popular movies array for debugging
 
+        // Return the index view with the fetched data
         return view('index', [
             'popularMovies' => $popularMovies,
             'allGenres' => $genresArray,
@@ -99,14 +101,16 @@ class MovieController extends Controller
     }
 
     public function addMovie(Request $request) {
-        $movie = $this->createMovie($request);
-        $movie_id = $movie->id;
+        $movie = $this->createMovie($request); // Call the create method with the requested movie
+        $movie_id = $movie->id; // Get the movie ID
         $user = Auth::user(); // Get the authenticated user
-        $userId = $user->id;
+        $userId = $user->id; // Get the ID of the authenticated user
 
+        // Get the users movies from the User_has_movies table
         $userHasMovie = User_has_movies::where('user_id', $userId)->where('movie_id', $movie_id)->exists();
 
         if ($userHasMovie) {
+            // The movie is already on the users watchlist
             return response()->json(['message' => 'User already added this movie']);
         } else {
             // Update the user_has_movies table with the new movie/user relationship
@@ -118,6 +122,8 @@ class MovieController extends Controller
             $user_has_movie->watched = 0;
             $user_has_movie->save();
         }
+
+        // Return a json response with a success message
         return response()->json(['message' => 'New movie added to user\'s watchlist']);
     }
 
@@ -127,6 +133,7 @@ class MovieController extends Controller
         $movieExists = Movie::where('movie_id', $movieId)->first(); // check if the movie exists in the database
 
         if ($movieExists) {
+            // If the movie already exists, we will return the movie
             response()->json(['message' => 'The movie already exists']);
             return $movieExists;
         } else {
@@ -137,6 +144,7 @@ class MovieController extends Controller
             $releaseDate = $request->input('releaseDate');
             $posterPath = $request->input('posterPath');
 
+            // Use the Movie model to store the attributes
             $movie = new Movie();
             $movie->movie_id = $movieId;
             $movie->rating = $voteAverage;
