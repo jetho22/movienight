@@ -12,19 +12,29 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     //
-    public function index() {
+    public function index(Request $request) {
         $user = Auth::user();
         $userId = $user->id;
-        $userMovies = User_has_movies::where('user_id', $userId)->get();
+        $isWatched = isset($_GET['watched']) ? $_GET['watched']: null;
+
+        if($this->checkValidity($isWatched)){
+            $userMovies = User_has_movies::where('user_id', $userId)
+                ->where('watched',$isWatched)
+                ->get();
+        } else {
+            $userMovies = User_has_movies::where('user_id', $userId)->get();
+        }
 
         // Get an array of movie_ids from the user_movies
         $movieIds = $userMovies->pluck('movie_id')->all();
 
         // Fetch movies based on the movie_ids
-        $movies = Movie::whereIn('id', $movieIds)->get();
-
+        $paginatedMovies = Movie::whereIn('id', $movieIds)->paginate(10);
+        if($this->checkValidity($isWatched)){
+            $paginatedMovies ->appends($request ->all());
+        }
         // Add a 'watched' column with a boolean value to the movies array
-        $movies = $movies->map(function ($movie) use ($userMovies) {
+        $movies = $paginatedMovies->map(function ($movie) use ($userMovies) {
             // Find the corresponding user_movie
             $userMovie = $userMovies->where('movie_id', $movie->id)->first();
 
@@ -42,6 +52,8 @@ class UserController extends Controller
 
         return view('watchlist', [
             'movies' => $movies,
+            'paginatedMovies' => $paginatedMovies,
+            'isWatched' => $isWatched
         ]);
     }
 
@@ -84,5 +96,12 @@ class UserController extends Controller
         } else {
             return response()->json(['message' => 'Record not found'], 404);
         }
+    }
+
+    private function checkValidity(?string $isWatched): bool
+    {
+        if($isWatched != null && ($isWatched == 0 || $isWatched == 1)){
+            return true;
+        } else return false;
     }
 }

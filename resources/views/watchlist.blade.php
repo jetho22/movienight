@@ -9,6 +9,7 @@
     <title>Movienight | Watchlist</title>
     <meta name="description" content="Create watch lists for your movie nights">
     <!-- Fonts -->
+
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -17,11 +18,18 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
+
 </head>
 <body class="background font-color">
     <main class="main">
         <x-navbar />
         <h1>Your Watchlist</h1>
+        <div class="btnRow">
+            <a @if ($isWatched == null) class="btn active" @else class="btn" @endif href="{{route('watchlist')}}">All</a>
+            <a @if ($isWatched == 1) class="btn active" @else class="btn" @endif href="{{route('watchlist',['watched' => '1'])}}">Watched</a>
+            <a @if ($isWatched == 0 && $isWatched != null) class="btn active" @else class="btn" @endif href="{{route('watchlist',['watched' => '0'])}}">Not Watched</a>
+        </div>
+
         <div class="movies-list">
             <div class="inner">
                 @foreach ($movies as $movie)
@@ -72,6 +80,7 @@
                 @endforeach
             </div>
         </div>
+        {{ $paginatedMovies->links() }}
         <x-footer/>
     </main>
 </body>
